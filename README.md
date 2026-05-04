@@ -379,6 +379,28 @@ Trino e Dremio foram considerados como próximos passos. Para manter a entrega o
 
 ---
 
+
+---
+
+## Limitações conhecidas
+
+A versão entregue prioriza uma pipeline end-to-end funcional, reprodutível e simples de executar localmente.
+
+A implementação atual materializa as camadas Bronze, Silver e Gold em arquivos Parquet locais e utiliza DuckDB como query engine para criação de views analíticas e consumo pelo Apache Superset.
+
+O MinIO foi incluído no `docker-compose.yml` como object storage local e base para evolução da arquitetura, mas nesta versão ele ainda não é usado como storage principal das tabelas analíticas.
+
+O enunciado solicita Apache Iceberg/Parquet sobre MinIO ou S3. Essa parte foi tratada como evolução arquitetural. Para uma versão produtiva ou mais aderente à stack final, a evolução natural seria:
+
+1. Materializar as camadas Bronze, Silver e Gold como tabelas Apache Iceberg sobre MinIO.
+2. Adicionar um catálogo Iceberg, como REST Catalog, Hive Metastore, Nessie ou JDBC Catalog.
+3. Usar Trino, Dremio ou Spark como engine principal de leitura e escrita das tabelas Iceberg.
+4. Conectar o Superset ao Trino ou Dremio, em vez de consumir diretamente o arquivo DuckDB local.
+5. Implementar escrita incremental com controle de snapshots, schema evolution e particionamento adequado.
+
+Essa decisão foi tomada para evitar complexidade excessiva no ambiente local e garantir que o fluxo completo, desde ingestão até dashboard, estivesse funcional dentro do prazo.
+
+
 ## 13. O que eu faria com mais tempo
 
 Melhorias futuras:
