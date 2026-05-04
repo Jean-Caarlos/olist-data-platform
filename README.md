@@ -1,6 +1,6 @@
 # Olist Data Platform
 
-Projeto desenvolvido como teste prático para a vaga de Engenheiro(a) de Dados - nível Pleno.
+Projeto desenvolvido como teste prático para a vaga de Engenheiro(a) de Dados
 
 A solução implementa uma plataforma analítica end-to-end usando dados públicos da Olist, enriquecidos com uma API pública de feriados nacionais. O pipeline organiza os dados em camadas Bronze, Silver e Gold, aplica checagens de qualidade, gera um modelo dimensional e disponibiliza indicadores de negócio em um dashboard no Apache Superset.
 
