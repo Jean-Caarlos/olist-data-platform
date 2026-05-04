@@ -13,7 +13,7 @@ Construir uma pipeline analítica local e reprodutível com:
 - Ingestão de dados CSV da Olist.
 - Ingestão de uma fonte adicional via API pública.
 - Organização em camadas Bronze, Silver e Gold.
-- Transformações com Python, Pandas e DuckDB.
+- Transformações com Python/Pandas e DuckDB.
 - Orquestração com Apache Airflow.
 - Armazenamento em Parquet.
 - Consulta analítica com DuckDB.
@@ -54,7 +54,8 @@ Componentes principais:
 | Airflow | Orquestra a pipeline |
 | Postgres | Banco de metadados do Airflow |
 | MinIO | Object storage local disponível no ambiente |
-| Python/Pandas | Ingestão e transformação |
+| Python/Pandas | Ingestão, limpeza e padronização dos dados |
+| DuckDB | Transformações analíticas, views e consulta sobre Parquet |
 | Parquet | Formato analítico das camadas |
 | DuckDB | Engine analítica local |
 | Superset | Dashboard de indicadores |
@@ -366,7 +367,7 @@ O MinIO foi incluído no ambiente como object storage local, deixando a arquitet
 
 ### DuckDB
 
-DuckDB foi usado como query engine local pela simplicidade operacional e boa performance para leitura de Parquet.
+DuckDB foi usado como query engine local pela simplicidade operacional e boa performance para leitura de Parquet. O enunciado aceita DuckDB como alternativa ao PySpark para transformação, por isso ele foi escolhido para manter a solução mais leve e reprodutível localmente.
 
 ### Iceberg
 
